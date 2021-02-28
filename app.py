@@ -34,6 +34,27 @@ cursor = conn.cursor()
 app.config['SECRET_KEY'] = 't1NP63m4wnBg6nyHYKfmc2TpCOGI4nss'
 
 
+
+
+ACCESS = {
+    'admin': 1,
+    'user': 2,
+}
+
+class User():
+    def __init__(self, name, email, password, access=ACCESS['user']):
+        self.name = name
+        self.email = email
+        self.password = password
+        self.access = access
+
+    def is_admin(self):
+        return self.access == ACCESS['admin']
+
+    def allowed(self, access_level):
+        return self.access >= access_level
+
+
 ''' Email Validation '''
 
 regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
@@ -186,6 +207,8 @@ class LoginApi(Resource):
         password = body.get('password')
         cursor.execute('''SELECT * FROM user WHERE email=%s''',(email))
         data = cursor.fetchall()
+        if not data.is_admin():
+            return make_response(jsonify({'message': 'Not Authorized'}))
         if data:
             for item in data:
                 print(item[4])
@@ -215,7 +238,8 @@ class MovieCURD(Resource):
         try:
             if request.method == 'POST':
                 json_data = request.json
-                print(json_data)
+                if not json_data.is_admin():
+                    return make_response(jsonify({'message': 'Not Authorized'}))
                 for item in json_data:
                     popularity = json_data['99popularity']
                     director = json_data['director']
@@ -244,6 +268,8 @@ class SingleMovie(Resource):
         try:
             if request.method == 'PUT':
                 json_data = request.json
+                if not json_data.is_admin():
+                    return make_response(jsonify({'message': 'Not Authorized'}))
                 popularity = json_data.get('99popularity', 0)
                 director = json_data.get('director', '-')
                 genre = json_data.get('genre', [])
