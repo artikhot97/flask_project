@@ -51,6 +51,7 @@ DB :
 - Indexing some of tables column 
 - Reduce server load by moving image and video to some third -party content delivery network (CDN) like CloudFront.
 - We can use AWS service for like RDS for DB or any other for database service 
+- Horizontal scaling the databases using sharding and replication
 
 Server Load: 
 - We can use Elastic Serach for Cacheing data 
