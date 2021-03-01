@@ -8,5 +8,5 @@ mysql-connector
 cryptography
 gunicorn==20.0.4
 Flask-RESTful
-
+flask-mysql
 
