@@ -236,8 +236,8 @@ class MovieCURD(Resource):
         try:
             if request.method == 'POST':
                 json_data = request.json
-                if not json_data.is_admin():
-                    return make_response(jsonify({'message': 'Not Authorized'}))
+                # if not json_data.is_admin():
+                #     return make_response(jsonify({'message': 'Not Authorized'}))
                 for item in json_data:
                     popularity = json_data['99popularity']
                     director = json_data['director']
@@ -266,8 +266,8 @@ class SingleMovie(Resource):
         try:
             if request.method == 'PUT':
                 json_data = request.json
-                if not json_data.is_admin():
-                    return make_response(jsonify({'message': 'Not Authorized'}))
+                # if not json_data.is_admin():
+                #     return make_response(jsonify({'message': 'Not Authorized'}))
                 popularity = json_data.get('99popularity', 0)
                 director = json_data.get('director', '-')
                 genre = json_data.get('genre', [])
