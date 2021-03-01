@@ -110,6 +110,9 @@ def datetime_handler(x):
 def dictify(a):
     return [dict(zip(("id","name"),vv)) for vv in a]
 
+@app.route('/', methods=['GET','POST'])
+def index():
+    return make_response(f' Hello World..!!') 
 
 ''' Decorator for validate Request with Token '''
 def is_valid_token(f): 
