@@ -7,4 +7,3 @@ mysql-connector-python
 mysql-connector
 cryptography
 gunicorn==20.0.4
-python=3.9.1
