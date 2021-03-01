@@ -1,17 +1,9 @@
 # flask_project
 
-Requirement 
-- pip3 install flask-bcrypt
-- pip3 install flask-jwt-extended
-- pip install flask-login
-- pip install PyJWT==1.7.1
-- pip3 install mysql-connector-python
-- pip3 install cryptography
-- Pip install Flask-MySQLdb
-- pip install MySQL-python==1.2.5
 
-1. Insall Above all Requirements
-2. Run python3 app.py 
+1. Insall Above all Requirements 
+ `python -m pip freeze > requirements.txt`
+3. Run python3 app.py 
 
 Create DB :
 - mysql -u root -p :- Enter Password 
