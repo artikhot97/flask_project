@@ -156,7 +156,7 @@ class UserSignUp(Resource):
             admin = resi_data.get('admin', None)
             passwrd = resi_data.get('password', None)
             public_id = str(uuid.uuid4())
-            register_date = str(datetime.now())  # use str just to avoid JSON Seializer error while retrive user details
+            register_date = str(datetime.datetime.now())  # use str just to avoid JSON Seializer error while retrive user details
             print(register_date)
             if not email_validate(email):
                 return make_response(
@@ -199,7 +199,6 @@ class UserList(Resource):
 
 
 ''' Login API '''
-
 class LoginApi(Resource):
     def post(self):
         body = request.json
@@ -207,11 +206,10 @@ class LoginApi(Resource):
         password = body.get('password')
         cursor.execute('''SELECT * FROM user WHERE email=%s''',(email))
         data = cursor.fetchall()
-        if not data.is_admin():
-            return make_response(jsonify({'message': 'Not Authorized'}))
         if data:
             for item in data:
-                print(item[4])
+                if not item[2]:
+                    return make_response(jsonify({'message': 'You are Not Authorized to view User List..!'}))
                 if check_password_hash(item[4], body.get('password')): 
                     # generates the JWT Token 
                     token = jwt.encode({ 
