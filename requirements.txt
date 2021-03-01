@@ -1,0 +1,10 @@
+flask
+flask-bcrypt
+flask-jwt-extended
+flask-login
+PyJWT==1.7.1
+mysql-connector-python
+mysql-connector
+cryptography
+gunicorn==20.0.4
+python=3.9.1
